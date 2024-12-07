@@ -11,13 +11,16 @@ import com.example.vmeste.adapters.ChatAdapter
 import com.example.vmeste.databinding.FragmentHomeBinding
 import com.example.vmeste.models.Chat
 import com.example.vmeste.R
-
+import com.example.vmeste.api.RetrofitClient
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding ?: throw IllegalStateException("Binding is null")
     private lateinit var chatAdapter: ChatAdapter
-    private lateinit var chatList: List<Chat>
+    private var chatList: List<Chat> = emptyList()
 
     companion object {
         const val TAG = "HomeFragment"
@@ -34,19 +37,35 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Initialize dummy data
-        chatList = listOf(
-            Chat("Разумовский", "Сыграем в игру?", R.mipmap.razum, "10:30 AM"),
-            Chat("Юля❤\uFE0F", "Как дела, Угорёк?", R.mipmap.pchelkin, "11:15 AM"),
-            Chat("Дубин", "Я нашел один холодильник", R.mipmap.dubin, "1:45 PM"),
-            Chat("Федор Иванович", "ИГОРЬ!!! ЗАЙДИ СРОЧНО!!!", R.mipmap.prokop, "3:20 PM")
-        )
-
-        // Setup RecyclerView
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
         chatAdapter = ChatAdapter(chatList)
         binding.recyclerView.adapter = chatAdapter
-        Log.d(TAG, "onViewCreated called")
+
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            fetchChats()
+        }
+
+        fetchChats()
+    }
+
+    private fun fetchChats() {
+        RetrofitClient.instance.getChats().enqueue(object : Callback<List<Chat>> {
+            override fun onResponse(call: Call<List<Chat>>, response: Response<List<Chat>>) {
+                if (response.isSuccessful && response.body() != null) {
+                    chatList = response.body()!!
+                    chatAdapter.updateData(chatList)
+                    Log.d(TAG, "Chats fetched successfully")
+                } else {
+                    Log.e(TAG, "Response is not successful")
+                }
+                binding.swipeRefreshLayout.isRefreshing = false
+            }
+
+            override fun onFailure(call: Call<List<Chat>>, t: Throwable) {
+                Log.e(TAG, "API call failed", t)
+                binding.swipeRefreshLayout.isRefreshing = false
+            }
+        })
     }
 
     override fun onStart() {

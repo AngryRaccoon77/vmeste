@@ -41,10 +41,10 @@ android {
 }
 
 dependencies {
-    implementation(libs.ktor.ktor.client.core)
-    implementation (libs.ktor.client.cio)
-    implementation (libs.ktor.client.serialization)
-    implementation (libs.ktor.ktor.client.logging)
+    implementation (libs.glide)
+    implementation(libs.glide.transformations)
+    implementation (libs.squareup.retrofit)
+    implementation(libs.converter.gson.v2110)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -56,6 +56,7 @@ dependencies {
     implementation(libs.navigation.ui.ktx)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.dynamic.features.fragment)
+    implementation(libs.androidx.swiperefreshlayout)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

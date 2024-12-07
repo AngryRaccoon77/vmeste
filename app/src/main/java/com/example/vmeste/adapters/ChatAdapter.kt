@@ -6,15 +6,26 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vmeste.databinding.ItemChatBinding
 import com.example.vmeste.models.Chat
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CircleCrop
+import com.example.vmeste.R
 
-class ChatAdapter(private val chatList: List<Chat>) : RecyclerView.Adapter<ChatAdapter.ChatViewHolder>() {
-
+class ChatAdapter(private var chatList: List<Chat>) : RecyclerView.Adapter<ChatAdapter.ChatViewHolder>() {
+    fun updateData(newChatList: List<Chat>) {
+        chatList = newChatList
+        notifyDataSetChanged()
+    }
     class ChatViewHolder(private val binding: ItemChatBinding) : RecyclerView.ViewHolder(binding.root) {
+
         fun bind(chat: Chat) {
             binding.senderName.text = chat.senderName
             binding.lastMessage.text = chat.lastMessage
             binding.time.text = chat.time
-            binding.profileImage.setImageResource(chat.profileImage)
+            Glide.with(binding.profileImage.context)
+                .load(chat.profileImage)
+                .placeholder(R.drawable.logo)
+                .transform(CircleCrop())
+                .into(binding.profileImage)
         }
     }
 
@@ -27,7 +38,6 @@ class ChatAdapter(private val chatList: List<Chat>) : RecyclerView.Adapter<ChatA
         holder.bind(chatList[position])
     }
 
-    override fun getItemCount(): Int {
-        return chatList.size
-    }
+    override fun getItemCount(): Int = chatList.size
 }
+

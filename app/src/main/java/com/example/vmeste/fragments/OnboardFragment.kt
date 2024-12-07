@@ -41,7 +41,7 @@ class OnboardFragment : Fragment() {
         private const val TOUCH_RADIUS = 300f
         private const val BASE_MASS = 0.45f
         private const val DAMPING_BASE = 0.997f
-        private const val COLLISION_ELASTICITY = 0.90f
+        private const val COLLISION_ELASTICITY = 0.99f
         private const val MIN_VELOCITY = 0.6f
     }
 

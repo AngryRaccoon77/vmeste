@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
-    <background android:drawable="@drawable/dubin_background"/>
-    <foreground android:drawable="@mipmap/dubin_foreground"/>
-</adaptive-icon>
