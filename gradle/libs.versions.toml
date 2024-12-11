@@ -2,6 +2,7 @@
 agp = "8.6.0"
 converterGson = "2.8.4"
 converterGsonVersion = "2.11.0"
+datastorePreferences = "1.0.0"
 glide = "4.15.1"
 glideTransformations = "4.3.0"
 gradle = "8.2.0"
@@ -23,14 +24,22 @@ navigationFragment = "2.8.3"
 navigationFragmentKtx = "2.5.3"
 navigationUiKtx = "2.8.3"
 retrofit = "2.4.0"
+roomCompiler = "2.5.0"
+roomKtx = "2.5.0"
+roomRuntime = "2.5.0"
 swiperefreshlayout = "1.1.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferences" }
 androidx-navigation-dynamic-features-fragment = { module = "androidx.navigation:navigation-dynamic-features-fragment", version.ref = "navigationFragment" }
 androidx-navigation-fragment = { module = "androidx.navigation:navigation-fragment", version.ref = "navigationFragment" }
 androidx-navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigationFragmentKtx" }
 androidx-navigation-ui = { module = "androidx.navigation:navigation-ui", version.ref = "navigationFragment" }
+androidx-room-compiler = { module = "androidx.room:room-compiler" }
+androidx-room-ktx = { module = "androidx.room:room-ktx" }
+androidx-room-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomCompiler" }
+androidx-room-runtime = { module = "androidx.room:room-runtime" }
 compiler = { module = "com.github.bumptech.glide:compiler", version.ref = "glide" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson" }
 converter-gson-v2110 = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGsonVersion" }
@@ -58,6 +67,9 @@ navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.
 retrofit = { module = "com.squareup.retrofit2:retrofit" }
 retrofit2-converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
 retrofit2-retrofit = { module = "com.squareup.retrofit2:retrofit" }
+room-compiler = { module = "androidx.room:room-compiler" }
+room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomKtx" }
+room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
 squareup-retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 androidx-swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swiperefreshlayout" }
 

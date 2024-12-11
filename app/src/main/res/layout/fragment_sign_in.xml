@@ -32,7 +32,9 @@
             android:id="@+id/emailInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center" />
+            android:layout_gravity="center"
+            android:autofillHints="emailAddress"
+            />
 
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
@@ -51,6 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:inputType="textPassword"
+            android:autofillHints="password"
             />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -61,7 +64,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="160dp"
+        android:layout_marginEnd="168dp"
         android:text="Войти"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordField" />
@@ -71,7 +74,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginEnd="136dp"
+        android:layout_marginEnd="148dp"
         android:text="Регистрация"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonSignIn" />

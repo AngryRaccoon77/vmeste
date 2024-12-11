@@ -4,5 +4,5 @@
         android:startColor="#61C5FE"
         android:endColor="#C77EFF"
         android:angle="225"/>
-    <corners android:radius="280dp"/>    <!-- Закругленные углы для круга -->
+    <corners android:radius="280dp"/>
 </shape>

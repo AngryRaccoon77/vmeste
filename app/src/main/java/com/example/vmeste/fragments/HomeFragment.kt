@@ -1,11 +1,13 @@
 package com.example.vmeste.fragments
 
 import android.os.Bundle
+import android.os.Environment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.vmeste.adapters.ChatAdapter
 import com.example.vmeste.databinding.FragmentHomeBinding
@@ -15,6 +17,9 @@ import com.example.vmeste.api.RetrofitClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.File
+import java.io.FileOutputStream
+
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
@@ -45,7 +50,29 @@ class HomeFragment : Fragment() {
             fetchChats()
         }
 
+        binding.topAppBar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.action_settings -> {
+                    findNavController().navigate(R.id.action_homeFragment_to_settingsFragment)
+                    true
+                }
+                else -> false
+            }
+        }
+
         fetchChats()
+    }
+
+    private fun saveChatsToFile(chats: List<Chat>) {
+        val fileName = "MayorGromVmeste.txt"
+        val documentsDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
+        val file = File(documentsDir, fileName)
+
+        FileOutputStream(file).use { output ->
+            chats.forEach { chat ->
+                output.write("${chat.toString()}\n".toByteArray())
+            }
+        }
     }
 
     private fun fetchChats() {
@@ -54,6 +81,7 @@ class HomeFragment : Fragment() {
                 if (response.isSuccessful && response.body() != null) {
                     chatList = response.body()!!
                     chatAdapter.updateData(chatList)
+                    saveChatsToFile(chatList)
                     Log.d(TAG, "Chats fetched successfully")
                 } else {
                     Log.e(TAG, "Response is not successful")
